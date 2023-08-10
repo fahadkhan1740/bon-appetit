@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreBoxRequest extends FormRequest
@@ -17,12 +18,14 @@ class StoreBoxRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            'delivery_date' => ['required', 'date', 'after:today']
+            'delivery_date' => ['required', 'date', 'after:today'],
+            'recipes' => ['required', 'array'],
+            'recipes.*.id' => ['required', 'distinct', 'exists:recipes,id'],
         ];
     }
 }

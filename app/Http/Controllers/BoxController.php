@@ -11,22 +11,16 @@ use Symfony\Component\HttpFoundation\Response;
 class BoxController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreBoxRequest $request): JsonResponse
     {
         $box = Box::create($request->only('delivery_date'));
 
+        $box->recipes()->attach(array_column($request->input('recipes'), 'id'));
+
         return response()->json([
-            'data' => $box
+            'data' => $box->load('recipes')
         ], Response::HTTP_CREATED);
     }
 }
