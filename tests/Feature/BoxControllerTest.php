@@ -51,13 +51,13 @@ class BoxControllerTest extends TestCase
     public function it_validates_creating_a_box(): void
     {
         $this->postJson('/api/box', [
-            'delivery_date' => 123456780,
+            'delivery_date' => '2023-01-01',
+            'recipes' => [['id' => Recipe::factory()->create()->id]]
         ])
             ->assertUnprocessable()
             ->assertJsonFragment([
                 'delivery_date' => [
-                    'The delivery date field must be a date after today.',
-                    'The delivery date field must be a valid date.'
+                    'The delivery date must be beyond 48 hours.',
                 ],
             ]);
 
@@ -72,7 +72,7 @@ class BoxControllerTest extends TestCase
             ]);
 
         $this->postJson('/api/box', [
-            'delivery_date' => now()->addDay()->format('Y-m-d'),
+            'delivery_date' => now()->addDays(5)->format('Y-m-d'),
             'recipes' => [
                 ['id' => 'random-id']
             ]
