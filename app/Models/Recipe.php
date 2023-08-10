@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Recipe extends Model
 {
     use HasFactory;
-    use UUID;
 
     protected $guarded = [];
 
