@@ -27,6 +27,7 @@ class StoreRecipeRequest extends FormRequest
             'description' => ['required', 'string', 'min:10', 'max:500'],
             'ingredients' => ['required', 'array'],
             'ingredients.*.id' => ['required', 'distinct', 'exists:ingredients,id'],
+            'ingredients.*.amount' => ['required', 'numeric', 'min:0.001'],
         ];
     }
 }

@@ -64,4 +64,57 @@ class RecipeControllerTest extends TestCase
                 ]
             ]);
     }
+
+    /** @test */
+    public function it_validates_creating_a_recipe(): void
+    {
+        $this->postJson('/api/recipes', [
+            'name' => 123456780,
+            'description' => 'km',
+            'ingredients' => 21324354675
+        ])
+            ->assertUnprocessable()
+            ->assertJsonFragment([
+                'name' => ['The name field must be a string.'],
+                'description' => ['The description field must be at least 10 characters.'],
+                'ingredients' => ['The ingredients field must be an array.']
+            ]);
+
+        $this->postJson('/api/recipes', [
+            'name' => '',
+            'description' => '',
+            'ingredients' => ''
+        ])
+            ->assertUnprocessable()
+            ->assertJsonFragment([
+                'name' => ['The name field is required.'],
+                'description' => ['The description field is required.'],
+                'ingredients' => ['The ingredients field is required.']
+            ]);
+
+        $this->postJson('/api/recipes', [
+            'name' => '',
+            'description' => '',
+            'ingredients' => ''
+        ])
+            ->assertUnprocessable()
+            ->assertJsonFragment([
+                'name' => ['The name field is required.'],
+                'description' => ['The description field is required.'],
+                'ingredients' => ['The ingredients field is required.']
+            ]);
+
+        $this->postJson('/api/recipes', [
+            'name' => 'foobar',
+            'description' => 'This is a foodbar recipe',
+            'ingredients' => [
+                ['id' => 'random-id', 'amount' => 'too-much']
+            ]
+        ])
+            ->assertUnprocessable()
+            ->assertJsonFragment([
+                'ingredients.0.id' => ['The selected ingredients.0.id is invalid.'],
+                'ingredients.0.amount' => ['The ingredients.0.amount field must be a number.']
+            ]);
+    }
 }
