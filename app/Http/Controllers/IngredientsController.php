@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreIngredientRequest;
 use App\Models\Ingredients;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,14 +23,8 @@ class IngredientsController extends Controller
     /**
      * Creates a new ingredient
      */
-    public function store(Request $request): JsonResponse
+    public function store(StoreIngredientRequest $request): JsonResponse
     {
-        $request->validate([
-            'name' => ['required', 'min:2', 'max:255', 'string'],
-            'measure' => ['required', 'string', 'in:g,kg,pieces'],
-            'supplier' => ['required', 'min:2', 'max:255', 'string'],
-        ]);
-
         $ingredient = Ingredients::create($request->all());
 
         return response()->json([
