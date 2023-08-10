@@ -25,17 +25,15 @@ class RecipeControllerTest extends TestCase
     /** @test */
     public function it_creates_an_recipe(): void
     {
-        $this->withoutExceptionHandling();
-
         $ingredients = Ingredients::factory()->count(3)->create();
 
-        $r = $this->postJson('/api/recipes', [
+        $this->postJson('/api/recipes', [
             'name' => 'Tea',
             'description' => 'This is a Karak tea',
             'ingredients' => [
-                $ingredients[0]->id,
-                $ingredients[1]->id,
-                $ingredients[2]->id
+                ['id' => $ingredients[0]->id, 'amount' => '10'],
+                ['id' => $ingredients[1]->id, 'amount' => '1'],
+                ['id' => $ingredients[2]->id, 'amount' => '20']
             ]
         ])
             ->assertSuccessful()
@@ -44,9 +42,24 @@ class RecipeControllerTest extends TestCase
                     'name' => 'Tea',
                     'description' => 'This is a Karak tea',
                     'ingredients' => [
-                        ['id' => $ingredients[0]->id],
-                        ['id' => $ingredients[1]->id],
-                        ['id' => $ingredients[2]->id],
+                        [
+                            'id' => $ingredients[0]->id,
+                            'pivot' => [
+                                'amount' => '10'
+                            ]
+                        ],
+                        [
+                            'id' => $ingredients[1]->id,
+                            'pivot' => [
+                                'amount' => '1'
+                            ],
+                        ],
+                        [
+                            'id' => $ingredients[2]->id,
+                            'pivot' => [
+                                'amount' => '20'
+                            ],
+                        ]
                     ]
                 ]
             ]);

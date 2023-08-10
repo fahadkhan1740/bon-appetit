@@ -26,7 +26,9 @@ class RecipeController extends Controller
     {
         $recipe = Recipe::create($request->except('ingredients'));
 
-        $recipe->ingredients()->attach($request->only('ingredients')['ingredients']);
+        foreach ($request->only('ingredients')['ingredients'] as $ingredient) {
+            $recipe->ingredients()->attach($ingredient['id'], ['amount' => $ingredient['amount']]);
+        }
 
         return response()->json([
                 'data' => $recipe->load('ingredients')

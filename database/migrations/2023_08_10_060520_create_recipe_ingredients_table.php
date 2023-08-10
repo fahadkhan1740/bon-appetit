@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('recipe_ingredients', function (Blueprint $table) {
             $table->unsignedBigInteger('recipe_id');
             $table->unsignedBigInteger('ingredient_id');
+            $table->unsignedDecimal('amount', 4,3);
             $table->timestamps();
         });
     }
