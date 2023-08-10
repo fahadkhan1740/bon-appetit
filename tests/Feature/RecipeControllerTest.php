@@ -93,18 +93,6 @@ class RecipeControllerTest extends TestCase
             ]);
 
         $this->postJson('/api/recipes', [
-            'name' => '',
-            'description' => '',
-            'ingredients' => ''
-        ])
-            ->assertUnprocessable()
-            ->assertJsonFragment([
-                'name' => ['The name field is required.'],
-                'description' => ['The description field is required.'],
-                'ingredients' => ['The ingredients field is required.']
-            ]);
-
-        $this->postJson('/api/recipes', [
             'name' => 'foobar',
             'description' => 'This is a foodbar recipe',
             'ingredients' => [

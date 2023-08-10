@@ -46,4 +46,40 @@ class BoxControllerTest extends TestCase
                 ]
             ]);
     }
+
+    /** @test */
+    public function it_validates_creating_a_box(): void
+    {
+        $this->postJson('/api/box', [
+            'delivery_date' => 123456780,
+        ])
+            ->assertUnprocessable()
+            ->assertJsonFragment([
+                'delivery_date' => [
+                    'The delivery date field must be a date after today.',
+                    'The delivery date field must be a valid date.'
+                ],
+            ]);
+
+        $this->postJson('/api/box', [
+            'delivery_date' => '',
+            'recipes' => '',
+        ])
+            ->assertUnprocessable()
+            ->assertJsonFragment([
+                'delivery_date' => ['The delivery date field is required.'],
+                'recipes' => ['The recipes field is required.']
+            ]);
+
+        $this->postJson('/api/box', [
+            'delivery_date' => now()->addDay()->format('Y-m-d'),
+            'recipes' => [
+                ['id' => 'random-id']
+            ]
+        ])
+            ->assertUnprocessable()
+            ->assertJsonFragment([
+                'recipes.0.id' => ['The selected recipes.0.id is invalid.']
+            ]);
+    }
 }
