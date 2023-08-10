@@ -15,7 +15,7 @@ class RecipeController extends Controller
     public function index(): JsonResponse
     {
         return response()->json([
-                'data' => Recipe::paginate()
+            'data' => Recipe::paginate()
         ], Response::HTTP_OK);
     }
 
@@ -26,8 +26,10 @@ class RecipeController extends Controller
     {
         $recipe = Recipe::create($request->except('ingredients'));
 
+        $recipe->ingredients()->attach($request->only('ingredients')['ingredients']);
+
         return response()->json([
-                'data' => $recipe
+                'data' => $recipe->load('ingredients')
         ], Response::HTTP_CREATED);
     }
 }
