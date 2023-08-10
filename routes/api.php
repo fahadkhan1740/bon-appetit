@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BoxController;
 use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\RecipeController;
 use Illuminate\Http\Request;
@@ -25,3 +26,5 @@ Route::post('ingredients', [IngredientsController::class, 'store']);
 
 Route::get('recipes', [RecipeController::class, 'index']);
 Route::post('recipes', [RecipeController::class, 'store']);
+
+Route::post('box', [BoxController::class, 'store']);
