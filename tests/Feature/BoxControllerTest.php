@@ -23,7 +23,7 @@ class BoxControllerTest extends TestCase
             )
         )->create();
 
-        $futureDate = now()->addDay()->format('Y-m-d');
+        $futureDate = now()->addDays(3)->format('Y-m-d');
 
         $this->postJson('/api/box', [
             'delivery_date' => $futureDate,
