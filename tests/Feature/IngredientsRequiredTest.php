@@ -46,8 +46,11 @@ class IngredientsRequiredTest extends TestCase
 
         $orderDate = today()->format('Y-m-d');
 
-        $response = $this->getJson('/api/ingredients-required?order_date=' . $orderDate);
+        $response = $this->getJson('/api/ingredients-required?order_date=' . $orderDate)->assertSuccessful();
 
-        $response->assertStatus(200);
+        $this->assertCount(3, $response->json('data')['data']);
+        $this->assertEquals(8, $response->json('data')['data'][0]['amount']);
+        $this->assertEquals(6, $response->json('data')['data'][1]['amount']);
+        $this->assertEquals(900, $response->json('data')['data'][2]['amount']);
     }
 }

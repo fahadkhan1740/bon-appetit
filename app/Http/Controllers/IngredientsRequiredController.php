@@ -15,6 +15,8 @@ class IngredientsRequiredController extends Controller
      */
     public function index(IngredientsRequiredListFormRequest $request): JsonResponse
     {
+        
+
         return response()->json([
 
         ], Response::HTTP_OK);
