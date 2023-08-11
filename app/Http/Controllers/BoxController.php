@@ -18,6 +18,7 @@ class BoxController extends Controller
     {
         $data = QueryBuilder::for(Box::class)
             ->allowedFilters('delivery_date')
+            ->with('recipes')
             ->paginate();
 
         return response()->json([

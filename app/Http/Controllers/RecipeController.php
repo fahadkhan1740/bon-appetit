@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRecipeRequest;
+use App\Models\Ingredients;
 use App\Models\Recipe;
 use Illuminate\Http\JsonResponse;
+use Spatie\QueryBuilder\QueryBuilder;
 use Symfony\Component\HttpFoundation\Response;
 
 class RecipeController extends Controller
@@ -14,8 +16,12 @@ class RecipeController extends Controller
      */
     public function index(): JsonResponse
     {
+        $data = QueryBuilder::for(Recipe::class)
+            ->with('ingredients')
+            ->paginate();
+
         return response()->json([
-            'data' => Recipe::paginate()
+            'data' => $data
         ], Response::HTTP_OK);
     }
 
