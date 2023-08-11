@@ -24,7 +24,7 @@ class StoreBoxRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'delivery_date' => ['required', 'date', new ValidDeliveryDate],
+            'delivery_date' => ['required', 'date', 'date_format:Y-m-d', new ValidDeliveryDate],
             'recipes' => ['required', 'array'],
             'recipes.*.id' => ['required', 'distinct', 'exists:recipes,id'],
         ];

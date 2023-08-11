@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BoxController;
 use App\Http\Controllers\IngredientsController;
+use App\Http\Controllers\IngredientsRequiredController;
 use App\Http\Controllers\RecipeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('ingredients', [IngredientsController::class, 'index']);
 Route::post('ingredients', [IngredientsController::class, 'store']);
+
+Route::get('ingredients-required', [IngredientsRequiredController::class, 'index']);
 
 Route::get('recipes', [RecipeController::class, 'index']);
 Route::post('recipes', [RecipeController::class, 'store']);
