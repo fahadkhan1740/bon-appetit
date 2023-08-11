@@ -22,6 +22,19 @@ class IngredientControllerTest extends TestCase
     }
 
     /** @test */
+    public function it_filters_ingredients_by_supplier(): void
+    {
+        Ingredients::factory()->create(['supplier' => 'lulu']);
+        Ingredients::factory()->create(['supplier' => 'carrefour']);
+        Ingredients::factory()->create(['supplier' => 'union']);
+
+        $response = $this->getJson('/api/ingredients?filter[supplier]=carr')->assertSuccessful();
+
+        $this->assertCount(1, $response->json('data')['data']);
+        $this->assertEquals('carrefour', $response->json('data')['data'][0]['supplier']);
+    }
+
+    /** @test */
     public function it_creates_an_ingredient(): void
     {
         $this->postJson('/api/ingredients', [

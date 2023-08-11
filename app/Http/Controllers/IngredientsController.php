@@ -6,6 +6,7 @@ use App\Http\Requests\StoreIngredientRequest;
 use App\Models\Ingredients;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 use Symfony\Component\HttpFoundation\Response;
 
 class IngredientsController extends Controller
@@ -15,8 +16,12 @@ class IngredientsController extends Controller
      */
     public function index(): JsonResponse
     {
+        $data = QueryBuilder::for(Ingredients::class)
+            ->allowedFilters('supplier')
+            ->paginate();
+
         return response()->json([
-            'data' => Ingredients::paginate()
+            'data' => $data
         ], Response::HTTP_OK);
     }
 
