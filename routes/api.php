@@ -27,4 +27,5 @@ Route::post('ingredients', [IngredientsController::class, 'store']);
 Route::get('recipes', [RecipeController::class, 'index']);
 Route::post('recipes', [RecipeController::class, 'store']);
 
+Route::get('box', [BoxController::class, 'index']);
 Route::post('box', [BoxController::class, 'store']);

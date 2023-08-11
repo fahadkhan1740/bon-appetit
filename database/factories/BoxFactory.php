@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Recipe;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class BoxFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'delivery_date' => now()->addWeek()->format('Y-m-d'),
         ];
     }
 }
