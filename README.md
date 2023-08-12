@@ -10,6 +10,11 @@ It's a simple app to create boxes of recipes.
 
 ## Getting Started
 
+Please use the following command to prepare .env file if it doesn't exist
+```
+cp .env.example .env
+```
+
 Please run the following command to initialise the app from the home directory. Please make sure that the docker is up and running on your system.
 
 ```
