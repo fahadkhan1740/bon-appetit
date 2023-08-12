@@ -188,6 +188,9 @@ Endpoint: /api/ingredients-required
 http://localhost/api/box?order_date=2023-10-01
 ```
 
+## Postman Collection
+
+You can see the APIs in action [here](https://www.postman.com/devlov/workspace/bon-appetit/collection/12485236-f8b017db-2ac8-422c-aa37-bc7ea0018b9f?action=share&creator=12485236).
 
 ## Testing
 
