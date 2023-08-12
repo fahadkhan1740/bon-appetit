@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @method static create(array $only)
+ * @method static whereDate(string $string, mixed $input)
  */
 class Box extends Model
 {

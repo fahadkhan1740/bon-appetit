@@ -120,6 +120,10 @@ Endpoint: /api/recipes
 Type: GET
 Endpoint: /api/recipes
 ```
+**Example**
+```
+http://localhost/api/recipes
+```
 
 5. Create a Box
 ```
@@ -158,6 +162,11 @@ Endpoint: /api/box
 |---------------|---------------------------------------------|
 | delivery_date | Filters boxes based on the `delivery_date`  |
 
+**Example**
+```
+http://localhost/api/box?filters[delivery_date]=2023-10-01
+```
+
 7. Ingredients required based on orders placed
 ```
 Type: GET
@@ -165,9 +174,14 @@ Endpoint: /api/ingredients-required
 ```
 **Filters**
 
-| Key           | Description                                                       |
-|---------------|-------------------------------------------------------------------|
-| delivery_date | Filters ingredients based on the date when the orders were placed |
+| Key        | Description                                                       |
+|------------|-------------------------------------------------------------------|
+| order_date | Filters ingredients based on the date when the orders were placed |
+
+**Example**
+```
+http://localhost/api/box?order_date=2023-10-01
+```
 
 
 ## Testing

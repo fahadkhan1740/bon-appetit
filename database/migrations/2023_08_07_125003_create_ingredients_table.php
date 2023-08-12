@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('measure');
             $table->string('supplier');
-            $table->unsignedInteger('amount');
             $table->timestamps();
         });
     }
