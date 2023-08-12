@@ -10,6 +10,11 @@ animate() {
   done
 }
 
+echo "Thinking..."
+animate
+
+composer install
+
 echo "Collecting ingredients..."
 animate
 

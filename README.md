@@ -2,6 +2,12 @@
 
 It's a simple app to create boxes of recipes.
 
+## Requirements
+
+- PHP 8.2 on your local machine
+- Composer package manager
+- Docker
+
 ## Getting Started
 
 Please run the following command to initialise the app from the home directory. Please make sure that the docker is up and running on your system.
