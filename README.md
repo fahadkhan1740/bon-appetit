@@ -53,6 +53,15 @@ Endpoint: /api/ingredients
 | measure  | Measurement unit of the item |
 | supplier | Name of the Supplier         |
 
+**Example**
+```
+{
+    "name": "Bread",
+    "measure": "pieces",
+    "supplier": "lulu"
+}
+```
+
 2. List the Ingredients
 
 ```
@@ -65,6 +74,11 @@ Endpoint: /api/ingredients
 | Key      | Description          |
 |----------|----------------------|
 | supplier | Name of the supplier |
+
+**Example**
+```
+http://localhost/api/ingredients?filters[supplier]=lulu
+```
 
 3. Create a Recipe
 ```
@@ -79,6 +93,20 @@ Endpoint: /api/recipes
 | name        | Name of the Recipe                                 |
 | description | Details about the Recipe                           |
 | ingredients | Array of ingredients with their `id` and `amount`  |
+
+**Example**
+```
+{
+    "name": "Toast",
+    "description": "This is a toast",
+    "ingredients": [
+        {
+            "id": 1,
+            "amount": 10.00
+        }
+    ]
+}
+```
 
 4. List the Recipes
 
@@ -99,6 +127,18 @@ Endpoint: /api/box
 |---------------|----------------------------------|
 | delivery_date | Date of the delivery             |
 | recipes       | Array of recipes with their `id` |
+
+**Example**
+```
+{
+    "delivery_date": "2023-10-01",
+    "recipes": [
+        {
+            "id": 1
+        }
+    ]
+}
+```
 
 6. List all Boxes
 ```
